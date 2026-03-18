@@ -1,0 +1,19 @@
+name: Multi-Environment Deployment
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environments:
+        description: 'Environments to deploy (JSON array)'
+        required: true
+        default: '["dev", "stg", "prod"]'
+        type: string
+
+jobs:
+  multi-env-deployment:
+    uses: ./.github/workflows/templates/multi-env-deployment.tpl
+    with:
+      environments: ${{ github.event.inputs.environments || '["dev", "stg", "prod"]' }}
+      runner-os: 'windows-latest'
