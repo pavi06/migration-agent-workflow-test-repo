@@ -1,0 +1,17 @@
+name: ASP.NET Core CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    uses: ./.github/workflows/templates/aspnet-core-ci-custom-actions.tpl
+    with:
+      dotnet-version: '8.0.x'
+      build-configuration: 'Release'
+      project-pattern: '**/*.csproj'
+      test-project-pattern: '**/*Tests/*.csproj'
+      artifact-name: 'drop'
+      publish-path: './artifacts'
+      runner-os: 'windows-2022'
