@@ -1,0 +1,17 @@
+name: dotnet-desktop-ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    uses: ./.github/workflows/templates/dotnet-desktop-ci.tpl
+    with:
+      build-configuration: 'Release'
+      build-platform: 'Any CPU'
+      solution-path: '**/*.sln'
+      dotnet-version: '6.0.x'
+      nuget-version: '4.4.1'
